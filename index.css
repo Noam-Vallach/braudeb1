@@ -1,0 +1,43 @@
+.container{
+    width: 280px;
+    margin: 15px auto;
+    background-color:rgb(233, 218, 218);
+}
+.but{
+float: left;
+width: 20px;
+margin: 15PX;
+margin-left: 15px;
+background-color: rgb(194, 191, 191);
+text-align: center;
+padding:10px ;
+border-radius: 4px;
+cursor:pointer;
+}
+.but:hover{
+  background-color: lightslategray;
+  color: rgb(233, 218, 218);
+}
+.result{
+float: left;
+width: 100px;
+height: 27px;
+margin: 15px;
+margin-left: 15px;
+background-color: rgb(194, 191, 191);
+text-align: center;
+padding:5px ;
+border-radius: 4px;
+cursor:pointer;
+}
+.result:hover{
+  background-color: lightslategray;
+  color: rgb(233, 218, 218);
+}
+.screen{
+background-color:rgb(163, 163, 163) ;
+width: 230px;
+padding:20px;
+margin:5px;
+border-radius: 4px;
+}

@@ -4,86 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        .container{
-            width: 280px;
-            margin: 15px auto;
-            background-color: gainsboro;
-        }
-    .butNum{
-        float: left;
-        width: 40px;
-        margin: 15px;
-        margin-left: 30px;
-        background-color: white;
-        text-align: center;
-        padding-top: 5px;
-        border-radius: 4px;
-        cursor:pointer;
-    }
-    .butNum:hover{
-        background-color: blue;
-        color: white;
-    }
-    .but{
-        float: left;
-        width: 40px;
-        margin: 15px;
-        margin-left: 25px;
-        background-color: gray;
-        text-align: center;
-        padding:5px ;
-        border-radius: 4px;
-        cursor:pointer;
-      }
-      .but:hover{
-          background-color: lightslategray;
-          color: rgb(233, 218, 218);
-      }
-      .result{
-            background-color: black;
-            width: 120px;
-            margin-left: 75px;
-            margin-top: -3px;
-            background-color: rgb(173, 173, 180);
-            text-align: center;
-            padding:5px ;
-            border-radius: 4px;
-            cursor:pointer;
-        }
-      .screen{
-        background-color:rgb(163, 163, 163) ;
-        width: 260px;
-        padding:5px;
-        color:black;
-        margin:5px;
-        border-radius: 4px;
-      }
-    </style>
+    <link rel="stylesheet" href="index.css" />
 </head>
 <body>
     <div style="text-align: center; font-size: 24px; color: black;">
         Calculator
     </div>
     <div class="container">
-        <div class="screen">0</div>
-        <div class="butNum">1</div>
-        <div class="butNum">2</div>
-        <div class="butNum">3</div>
-        <div class="butNum">4</div>
-        <div class="butNum">5</div>
-        <div class="butNum">6</div>
-        <div class="butNum">7</div>
-        <div class="butNum">8</div>
-        <div class="butNum">9</div>
-        <div class="butNum">0</div>
-        <div class="but">+</div>
-        <div class="but">-</div>
-        <div class="but">*</div>
+        <div class="screen"></div>
+        <div class="but" id="pai">π</div>
+        <div class="but" id="e">e</div>
+        <div class="but" id="ribua">x^2</div>
+        <div class="but" id="ac">AC</div>
+        <div class="but" id="diver">1/x</div>
+        <div class="but" id="abs">|x|</div>
+        <div class="but" id="sqrt">√x</div>
+        <div class="but" id="log">log</div>
+        <div class="but">(</div>
+        <div class="but">)</div>
+        <div class="but" id="factorial">n!</div>
         <div class="but">/</div>
-        <div class="but">AC</div>
-        <div style="clear: both;"></div>
-        <div class="result">=</div>
+        <div class="but"><b>7</b></div>
+        <div class="but"><b>8</b></div>
+        <div class="but"><b>9</b></div>
+        <div class="but">*</div>
+        <div class="but"><b>4</b></div>
+        <div class="but"><b>5</b></div>
+        <div class="but"><b>6</b></div>
+        <div class="but">-</div>
+        <div class="but"><b>1</b></div>
+        <div class="but"><b>2</b></div>
+        <div class="but"><b>3</b></div>
+        <div class="but">+</div>
+        <div class="but"><b>0</b></div>
+        <div class="but">.</div>
+        <div class="result" id="eq">=</div>
     </div>
     
     <!-- special scripts for integration in MTW gallery - must be placed at the bottom of the HTML after your code -->
@@ -94,23 +49,73 @@
             border: true // app border in the MTW page                    
         }
 
-        ///////////////////////////////////////////////////////
-        // implement this functions in order to use private API        
-        const sendPrivateApiRequest = async () => {
-            // your code here:
-            // sendRequestToParent({ cat: 'getAssets' })
-        }        
+      let btns=document.querySelectorAll(".but")
+      btns.forEach(b=>{
+        b.addEventListener("click",btnClick)
+      })
 
-        const acceptPrivateApiResponse = async (data) => {
-            // process received data here:
-            // console.log(data)
-        }
+      let ac=document.querySelector("#ac")
+      ac.removeEventListener("click",btnClick)
+      ac.addEventListener("click",clear)
 
-        // use this in order to send on document load
-        document.addEventListener('DOMContentLoaded', () => {
-            // your code here:
-            //sendRequestToParent({ method: 'getAssets' })
-        })
+      let eq=document.querySelector(".result")
+      eq.removeEventListener("click",btnClick)
+      eq.addEventListener("click",calculate)
+
+      let ribua=document.querySelector("#ribua")
+      ribua.removeEventListener("click",btnClick)
+      ribua.addEventListener("click",funcRibua)
+
+      function funcRibua(){
+        document.querySelector(".screen").textContent+="**2"
+      }
+
+      let diver=document.querySelector("#diver")
+      diver.removeEventListener("click",btnClick)
+      diver.addEventListener("click",funcDiver)
+
+      function funcDiver(){
+        document.querySelector(".screen").textContent+="1/"
+
+      }
+
+      let exp=document.querySelector("#e")
+      exp.removeEventListener("click",btnClick)
+      exp.addEventListener("click",funcExp)
+
+      function funcExp(){
+        document.querySelector(".screen").textContent+="e^"
+      }
+
+      let fact=document.querySelector("#factorial")
+      fact.removeEventListener("click",btnClick)
+      fact.addEventListener("click",funcFact)
+
+      function funcFact(){
+        document.querySelector(".screen").textContent+="!"
+      }
+  
+      let sqrt=document.querySelector("#sqrt")
+      sqrt.removeEventListener("click",btnClick)
+      sqrt.addEventListener("click",funcSqrt)
+
+      function funcSqrt(){
+        document.querySelector(".screen").textContent+="√" 
+      }
+
+      function calculate(){
+        let value=document.querySelector(".screen")
+        value.textContent=eval(value.textContent)
+        
+      }
+
+      function clear(){
+        document.querySelector(".screen").textContent=""
+      }
+
+      function btnClick(){
+          document.querySelector(".screen").textContent+=this.textContent
+      }
 
     </script>
     <script src="https://morethanwallet.com/appstore/index.js"></script>
